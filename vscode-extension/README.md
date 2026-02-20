@@ -52,6 +52,8 @@ Existing files are **never overwritten**.
 
 ## Requirements
 
+**No Claude CLI required.** The VS Code extension is fully standalone — it uses only the VS Code API and GitHub Copilot. It does not call `claude`, does not read Claude Code config files, and does not need Claude Code installed.
+
 - VS Code 1.95 or later
 - GitHub Copilot extension
 

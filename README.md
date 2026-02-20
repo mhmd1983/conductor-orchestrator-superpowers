@@ -83,6 +83,8 @@ Start a new Claude Code session. Type `/` and check for `/go`, `/conductor:imple
 
 Use Conductor directly from **GitHub Copilot Chat** in VS Code.
 
+> **No Claude CLI required.** The extension is fully standalone — it needs only VS Code 1.95+ and the GitHub Copilot extension. It does not call `claude` or read any Claude Code configuration.
+
 ### Install
 
 ```bash
@@ -385,6 +387,12 @@ Commands (slash commands) add zero context until invoked. Agents run as **subpro
 - If you start a project with Conductor and later switch tools, your specs and plans remain useful documentation.
 - The Evaluate-Loop pattern (plan → evaluate → execute → evaluate → fix) is a workflow methodology, not locked to any runtime.
 
+### Do I need Claude CLI to use the VS Code extension?
+
+**No.** The VS Code extension is **completely standalone**. It only requires VS Code 1.95+ and the GitHub Copilot extension — no `claude` CLI, no Claude Code installation, no Anthropic account needed for the extension itself. GitHub Copilot provides the AI responses inside VS Code.
+
+The VS Code extension scaffolds the `conductor/` project structure and writes `.github/copilot-instructions.md` so Copilot understands the Evaluate-Loop workflow. All actual AI work is done by GitHub Copilot, not by Claude Code.
+
 ### What does this cost in API credits?
 
 Conductor uses the same Claude API calls you'd make manually — it just structures them. Multi-agent orchestration does mean **more API calls** because:
@@ -438,8 +446,16 @@ The `conductor/` directory in your project persists after uninstall — it's jus
 
 ## Requirements
 
+### Claude Code plugin (slash commands, agents, skills)
+
 - [Claude Code](https://docs.anthropic.com/en/docs/claude-code) CLI
 - Git
+
+### VS Code extension (`@conductor` Copilot Chat participant)
+
+- VS Code 1.95 or later
+- GitHub Copilot extension
+- **No Claude CLI required**
 
 ## Third-Party
 
