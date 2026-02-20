@@ -87,13 +87,30 @@ Use Conductor directly from **GitHub Copilot Chat** in VS Code.
 
 ### Install
 
+<p align="center">
+  <a href="https://github.com/mhmd1983/conductor-orchestrator-superpowers/raw/main/vscode-extension/conductor-orchestrator-superpowers-3.3.0.vsix">
+    <img src="https://img.shields.io/badge/Download-VSIX_3.3.0-007ACC?style=for-the-badge&logo=visual-studio-code" alt="Download VSIX 3.3.0"/>
+  </a>
+</p>
+
+**Option A — one-liner (requires VS Code CLI):**
+
+```bash
+curl -L -o conductor.vsix \
+  https://github.com/mhmd1983/conductor-orchestrator-superpowers/raw/main/vscode-extension/conductor-orchestrator-superpowers-3.3.0.vsix \
+  && code --install-extension conductor.vsix
+```
+
+**Option B — GUI:** Click the badge above to download the `.vsix`, then in VS Code open the Extensions panel, click `⋯ → Install from VSIX…`, and select the downloaded file.
+
+**Option C — build from source:**
+
 ```bash
 cd vscode-extension
 npm install
-npm run compile
+npm run package   # produces conductor-orchestrator-superpowers-3.3.0.vsix
+code --install-extension conductor-orchestrator-superpowers-3.3.0.vsix
 ```
-
-Then press **F5** in VS Code to launch the Extension Development Host, or package it with `npx vsce package` to install as a `.vsix` file.
 
 ### Usage
 
