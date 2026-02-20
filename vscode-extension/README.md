@@ -1,23 +1,23 @@
 # Conductor Orchestrator Superpowers — VS Code Extension
 
 <p align="center">
-  <a href="https://github.com/mhmd1983/conductor-orchestrator-superpowers/raw/main/vscode-extension/conductor-orchestrator-superpowers-3.3.0.vsix">
-    <img src="https://img.shields.io/badge/Download-VSIX_3.3.0-007ACC?style=for-the-badge&logo=visual-studio-code" alt="Download VSIX"/>
+  <a href="https://github.com/mhmd1983/conductor-orchestrator-superpowers/releases/latest">
+    <img src="https://img.shields.io/github/v/release/mhmd1983/conductor-orchestrator-superpowers?filter=vscode-v*&label=Download%20VSIX&logo=visual-studio-code&color=007ACC&style=for-the-badge" alt="Download latest VSIX"/>
   </a>
 </p>
 
 ### Install in one command
 
 ```bash
-# 1. Download the VSIX
+# Download the latest VSIX from GitHub Releases and install it
+# (replace X.X.X with the version shown on the Releases page)
 curl -L -o conductor.vsix \
-  https://github.com/mhmd1983/conductor-orchestrator-superpowers/raw/main/vscode-extension/conductor-orchestrator-superpowers-3.3.0.vsix
-
-# 2. Install into VS Code
-code --install-extension conductor.vsix
+  https://github.com/mhmd1983/conductor-orchestrator-superpowers/releases/latest/download/conductor-orchestrator-superpowers-3.3.0.vsix \
+  && code --install-extension conductor.vsix
 ```
 
-Or click the badge above to download the `.vsix`, then in VS Code:
+Or go to the [**Releases page**](https://github.com/mhmd1983/conductor-orchestrator-superpowers/releases/latest),
+download the `.vsix` asset, then in VS Code:
 `Extensions panel → ⋯ menu → Install from VSIX…`
 
 ---

@@ -1,0 +1,67 @@
+name: Release VS Code Extension
+
+on:
+  push:
+    tags:
+      - "vscode-v*"   # e.g. vscode-v3.3.0
+
+permissions:
+  contents: write   # needed to create releases and upload assets
+
+jobs:
+  release:
+    name: Build & publish VSIX release
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+          cache: "npm"
+          cache-dependency-path: vscode-extension/package-lock.json
+
+      - name: Install dependencies
+        working-directory: vscode-extension
+        run: npm ci
+
+      - name: Package VSIX
+        working-directory: vscode-extension
+        run: npm run package
+
+      - name: Resolve VSIX filename
+        id: vsix
+        working-directory: vscode-extension
+        run: |
+          VSIX=$(ls *.vsix | head -1)
+          echo "file=$VSIX" >> "$GITHUB_OUTPUT"
+          echo "path=vscode-extension/$VSIX" >> "$GITHUB_OUTPUT"
+
+      - name: Create GitHub Release and upload VSIX
+        uses: softprops/action-gh-release@v2
+        with:
+          name: "VS Code Extension ${{ github.ref_name }}"
+          body: |
+            ## Conductor Orchestrator Superpowers — VS Code Extension
+
+            ### Install
+
+            **Option A — one command:**
+            ```bash
+            curl -L -o conductor.vsix \
+              https://github.com/${{ github.repository }}/releases/download/${{ github.ref_name }}/${{ steps.vsix.outputs.file }} \
+              && code --install-extension conductor.vsix
+            ```
+
+            **Option B — GUI:** Download the `.vsix` asset below, then in VS Code:
+            `Extensions panel → ⋯ menu → Install from VSIX…`
+
+            ### What's included
+            - `@conductor` Copilot Chat participant (`/init`, `/go`, `/status`, `/plan`, `/review`)
+            - `Conductor: Initialize Project` and `Conductor: Show Status` command palette commands
+            - No Claude CLI required — works with GitHub Copilot only
+          files: ${{ steps.vsix.outputs.path }}
+          draft: false
+          prerelease: false
