@@ -3,7 +3,7 @@
 </p>
 
 <p align="center">
-  <strong>Multi-agent orchestration for Claude Code</strong><br/>
+  <strong>Multi-agent orchestration for Claude Code &amp; GitHub Copilot</strong><br/>
   Parallel execution &bull; Automated quality gates &bull; Board of Directors
 </p>
 
@@ -11,11 +11,13 @@
   <a href="https://github.com/Ibrahim-3d/conductor-orchestrator-superpowers/blob/main/LICENSE"><img alt="MIT License" src="https://img.shields.io/badge/license-MIT-blue.svg"/></a>
   <a href="https://github.com/Ibrahim-3d/conductor-orchestrator-superpowers"><img alt="Version" src="https://img.shields.io/badge/version-3.3.0-green.svg"/></a>
   <a href="https://docs.anthropic.com/en/docs/claude-code"><img alt="Claude Code" src="https://img.shields.io/badge/Claude_Code-Plugin-blueviolet.svg"/></a>
+  <a href="vscode-extension/README.md"><img alt="VS Code Extension" src="https://img.shields.io/badge/VS_Code-Extension-007ACC.svg"/></a>
   <a href="https://github.com/obra/superpowers"><img alt="Superpowers" src="https://img.shields.io/badge/superpowers-v4.3.0-orange.svg"/></a>
 </p>
 
 <p align="center">
   <a href="#installation">Installation</a> &bull;
+  <a href="#vs-code-extension">VS Code Extension</a> &bull;
   <a href="#quick-start">Quick Start</a> &bull;
   <a href="#the-evaluate-loop">How It Works</a> &bull;
   <a href="#commands">Commands</a> &bull;
@@ -74,6 +76,61 @@ Download the latest release and extract to `~/.claude/plugins/conductor-orchestr
 ### Verify
 
 Start a new Claude Code session. Type `/` and check for `/go`, `/conductor:implement`, `/board-meeting` in the command list.
+
+---
+
+## VS Code Extension
+
+Use Conductor directly from **GitHub Copilot Chat** in VS Code.
+
+> **No Claude CLI required.** The extension is fully standalone — it needs only VS Code 1.95+ and the GitHub Copilot extension. It does not call `claude` or read any Claude Code configuration.
+
+### Install
+
+<p align="center">
+  <a href="https://github.com/mhmd1983/conductor-orchestrator-superpowers/releases/latest">
+    <img src="https://img.shields.io/github/v/release/mhmd1983/conductor-orchestrator-superpowers?filter=vscode-v*&label=Download%20VSIX&logo=visual-studio-code&color=007ACC&style=for-the-badge" alt="Download latest VSIX"/>
+  </a>
+</p>
+
+**Option A — one-liner (requires VS Code CLI):**
+
+```bash
+# Replace X.X.X with the version on the Releases page
+curl -L -o conductor.vsix \
+  https://github.com/mhmd1983/conductor-orchestrator-superpowers/releases/latest/download/conductor-orchestrator-superpowers-3.3.0.vsix \
+  && code --install-extension conductor.vsix
+```
+
+**Option B — GUI:** Go to the [**Releases page**](https://github.com/mhmd1983/conductor-orchestrator-superpowers/releases/latest), download the `.vsix` asset, then in VS Code open the Extensions panel, click `⋯ → Install from VSIX…`, and select the downloaded file.
+
+**Option C — build from source:**
+
+```bash
+cd vscode-extension
+npm install
+npm run package   # produces conductor-orchestrator-superpowers-3.3.0.vsix
+code --install-extension conductor-orchestrator-superpowers-3.3.0.vsix
+```
+
+### Usage
+
+Open the Copilot Chat panel (`Ctrl+Shift+I` / `Cmd+Shift+I`) and use the `@conductor` participant:
+
+```
+@conductor /init                          # initialize workflow in current project
+@conductor /go Add Stripe payments        # start a new track
+@conductor /status                        # view track registry
+@conductor /plan Refactor auth layer      # generate a plan template
+@conductor /review                        # run quality-gate checklist
+```
+
+Or use the **Command Palette** (`Ctrl+Shift+P`):
+
+- **Conductor: Initialize Project** — creates the `conductor/` directory structure and `.github/copilot-instructions.md`
+- **Conductor: Show Status** — opens `conductor/tracks.md` in Markdown preview
+
+See [`vscode-extension/README.md`](vscode-extension/README.md) for full details.
 
 ---
 
@@ -348,6 +405,12 @@ Commands (slash commands) add zero context until invoked. Agents run as **subpro
 - If you start a project with Conductor and later switch tools, your specs and plans remain useful documentation.
 - The Evaluate-Loop pattern (plan → evaluate → execute → evaluate → fix) is a workflow methodology, not locked to any runtime.
 
+### Do I need Claude CLI to use the VS Code extension?
+
+**No.** The VS Code extension is **completely standalone**. It only requires VS Code 1.95+ and the GitHub Copilot extension — no `claude` CLI, no Claude Code installation, no Anthropic account needed for the extension itself. GitHub Copilot provides the AI responses inside VS Code.
+
+The VS Code extension scaffolds the `conductor/` project structure and writes `.github/copilot-instructions.md` so Copilot understands the Evaluate-Loop workflow. All actual AI work is done by GitHub Copilot, not by Claude Code.
+
 ### What does this cost in API credits?
 
 Conductor uses the same Claude API calls you'd make manually — it just structures them. Multi-agent orchestration does mean **more API calls** because:
@@ -401,8 +464,16 @@ The `conductor/` directory in your project persists after uninstall — it's jus
 
 ## Requirements
 
+### Claude Code plugin (slash commands, agents, skills)
+
 - [Claude Code](https://docs.anthropic.com/en/docs/claude-code) CLI
 - Git
+
+### VS Code extension (`@conductor` Copilot Chat participant)
+
+- VS Code 1.95 or later
+- GitHub Copilot extension
+- **No Claude CLI required**
 
 ## Third-Party
 

@@ -1,0 +1,7 @@
+# Treat these binary file types as binary — no line-ending conversion
+*.vsix binary
+*.png  binary
+*.jpg  binary
+*.jpeg binary
+*.gif  binary
+*.zip  binary
