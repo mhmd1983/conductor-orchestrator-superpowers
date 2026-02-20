@@ -1,0 +1,86 @@
+{
+  "name": "conductor-orchestrator-superpowers",
+  "displayName": "Conductor Orchestrator Superpowers",
+  "description": "Multi-agent orchestration for GitHub Copilot — initialize Conductor workflow, agents, and skills into your project",
+  "version": "3.3.0",
+  "publisher": "conductor-orchestrator",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Ibrahim-3d/conductor-orchestrator-superpowers"
+  },
+  "homepage": "https://github.com/Ibrahim-3d/conductor-orchestrator-superpowers",
+  "icon": "icon.png",
+  "engines": {
+    "vscode": "^1.95.0"
+  },
+  "categories": [
+    "AI",
+    "Other"
+  ],
+  "keywords": [
+    "copilot",
+    "orchestration",
+    "conductor",
+    "multi-agent",
+    "ai"
+  ],
+  "activationEvents": [],
+  "main": "./out/extension.js",
+  "contributes": {
+    "commands": [
+      {
+        "command": "conductor.init",
+        "title": "Conductor: Initialize Project",
+        "category": "Conductor"
+      },
+      {
+        "command": "conductor.status",
+        "title": "Conductor: Show Status",
+        "category": "Conductor"
+      }
+    ],
+    "chatParticipants": [
+      {
+        "id": "conductor.orchestrator",
+        "name": "conductor",
+        "fullName": "Conductor Orchestrator",
+        "description": "Multi-agent orchestration: initialize workflow, plan and execute tracks, run quality gates",
+        "isSticky": true,
+        "commands": [
+          {
+            "name": "init",
+            "description": "Initialize Conductor workflow, agents, and skills into the current project"
+          },
+          {
+            "name": "go",
+            "description": "State your goal — Conductor handles spec, plan, execute, evaluate"
+          },
+          {
+            "name": "status",
+            "description": "Show all tracks and their current progress"
+          },
+          {
+            "name": "plan",
+            "description": "Create an implementation plan for a goal"
+          },
+          {
+            "name": "review",
+            "description": "Run a quality-gate evaluation on the current track"
+          }
+        ]
+      }
+    ]
+  },
+  "scripts": {
+    "vscode:prepublish": "npm run compile",
+    "compile": "tsc -p ./",
+    "watch": "tsc -watch -p ./",
+    "lint": "eslint src"
+  },
+  "devDependencies": {
+    "@types/node": "^22.0.0",
+    "@types/vscode": "^1.95.0",
+    "typescript": "^5.7.0"
+  }
+}

@@ -3,7 +3,7 @@
 </p>
 
 <p align="center">
-  <strong>Multi-agent orchestration for Claude Code</strong><br/>
+  <strong>Multi-agent orchestration for Claude Code &amp; GitHub Copilot</strong><br/>
   Parallel execution &bull; Automated quality gates &bull; Board of Directors
 </p>
 
@@ -11,11 +11,13 @@
   <a href="https://github.com/Ibrahim-3d/conductor-orchestrator-superpowers/blob/main/LICENSE"><img alt="MIT License" src="https://img.shields.io/badge/license-MIT-blue.svg"/></a>
   <a href="https://github.com/Ibrahim-3d/conductor-orchestrator-superpowers"><img alt="Version" src="https://img.shields.io/badge/version-3.3.0-green.svg"/></a>
   <a href="https://docs.anthropic.com/en/docs/claude-code"><img alt="Claude Code" src="https://img.shields.io/badge/Claude_Code-Plugin-blueviolet.svg"/></a>
+  <a href="vscode-extension/README.md"><img alt="VS Code Extension" src="https://img.shields.io/badge/VS_Code-Extension-007ACC.svg"/></a>
   <a href="https://github.com/obra/superpowers"><img alt="Superpowers" src="https://img.shields.io/badge/superpowers-v4.3.0-orange.svg"/></a>
 </p>
 
 <p align="center">
   <a href="#installation">Installation</a> &bull;
+  <a href="#vs-code-extension">VS Code Extension</a> &bull;
   <a href="#quick-start">Quick Start</a> &bull;
   <a href="#the-evaluate-loop">How It Works</a> &bull;
   <a href="#commands">Commands</a> &bull;
@@ -74,6 +76,41 @@ Download the latest release and extract to `~/.claude/plugins/conductor-orchestr
 ### Verify
 
 Start a new Claude Code session. Type `/` and check for `/go`, `/conductor:implement`, `/board-meeting` in the command list.
+
+---
+
+## VS Code Extension
+
+Use Conductor directly from **GitHub Copilot Chat** in VS Code.
+
+### Install
+
+```bash
+cd vscode-extension
+npm install
+npm run compile
+```
+
+Then press **F5** in VS Code to launch the Extension Development Host, or package it with `npx vsce package` to install as a `.vsix` file.
+
+### Usage
+
+Open the Copilot Chat panel (`Ctrl+Shift+I` / `Cmd+Shift+I`) and use the `@conductor` participant:
+
+```
+@conductor /init                          # initialize workflow in current project
+@conductor /go Add Stripe payments        # start a new track
+@conductor /status                        # view track registry
+@conductor /plan Refactor auth layer      # generate a plan template
+@conductor /review                        # run quality-gate checklist
+```
+
+Or use the **Command Palette** (`Ctrl+Shift+P`):
+
+- **Conductor: Initialize Project** — creates the `conductor/` directory structure and `.github/copilot-instructions.md`
+- **Conductor: Show Status** — opens `conductor/tracks.md` in Markdown preview
+
+See [`vscode-extension/README.md`](vscode-extension/README.md) for full details.
 
 ---
 
